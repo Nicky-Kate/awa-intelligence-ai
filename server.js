@@ -33,13 +33,13 @@ let silver = 30;
 async function updateSilverPrice() {
   try {
     const response = await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=silver&vs_currencies=usd"
+      "https://api.coingecko.com/api/v3/simple/price?ids=gramsilver&vs_currencies=usd"
     );
 
     const json = await response.json();
+if (json.gramsilver && json.gramsilver.usd) {
+    silver = json.gramsilver.usd; 
 
-    if (json.silver && json.silver.usd) {
-      silver = json.silver.usd;
       console.log("Silver live:", silver);
     }
   } catch (err) {
