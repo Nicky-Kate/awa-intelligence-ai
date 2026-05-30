@@ -30,6 +30,22 @@ async function updateGoldPrice() {
   }
 }
 let silver = 30;
+async function updateSilverPrice() {
+  try {
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=silver&vs_currencies=usd"
+    );
+
+    const json = await response.json();
+
+    if (json.silver && json.silver.usd) {
+      silver = json.silver.usd;
+      console.log("Silver live:", silver);
+    }
+  } catch (err) {
+    console.log("Silver Fehler:", err.message);
+  }
+}
 async function updateBitcoinPrice() {
   try {
     const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
@@ -46,9 +62,12 @@ async function updateBitcoinPrice() {
 
 updateBitcoinPrice();
 updateGoldPrice();
+updateSilverPrice();
+
 
 setInterval(updateBitcoinPrice, 60000);
 setInterval(updateGoldPrice, 60000);
+setInterval(updateSilverPrice, 60000);
 app.get("/", (req, res) => {
   res.send(`
   <!DOCTYPE html>
