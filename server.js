@@ -70,7 +70,7 @@ updateSilverPrice();
 
 setInterval(updateBitcoinPrice, 60000);
 setInterval(updateGoldPrice, 60000);
-setInterval(updateSilverPrice, 60000);
+setInterval(updateSilverPrice, 300000);
 app.get("/", (req, res) => {
   res.send(`
   <!DOCTYPE html>
