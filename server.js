@@ -13,6 +13,22 @@ let profit = 0;
 // Demo Live Preise
 let bitcoin = 67250;
 let gold = 2320;
+async function updateGoldPrice() {
+  try {
+    const response = await fetch(
+      "https://api.coingecko.com/api/v3/simple/price?ids=tether-gold&vs_currencies=usd"
+    );
+
+    const json = await response.json();
+
+    if (json["tether-gold"] && json["tether-gold"].usd) {
+      gold = json["tether-gold"].usd;
+      console.log("Gold live:", gold);
+    }
+  } catch (err) {
+    console.log("Gold Fehler:", err.message);
+  }
+}
 let silver = 30;
 async function updateBitcoinPrice() {
   try {
@@ -29,7 +45,10 @@ async function updateBitcoinPrice() {
 }
 
 updateBitcoinPrice();
+updateGoldPrice();
+
 setInterval(updateBitcoinPrice, 60000);
+setInterval(updateGoldPrice, 60000);
 app.get("/", (req, res) => {
   res.send(`
   <!DOCTYPE html>
