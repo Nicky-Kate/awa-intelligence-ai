@@ -1,4 +1,6 @@
+
 const express = require("express");
+const https = require("https");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,6 +14,34 @@ let profit = 0;
 let bitcoin = 67250;
 let gold = 2320;
 let silver = 30;
+function updateBitcoinPrice() {
+  https.get(
+    "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
+    (response) => {
+      let data = "";
+
+      response.on("data", (chunk) => {
+        data += chunk;
+      });
+
+      response.on("end", () => {
+        try {
+          const json = JSON.parse(data);
+
+          if (json.bitcoin && json.bitcoin.usd) {
+            bitcoin = json.bitcoin.usd;
+            console.log("Bitcoin:", bitcoin);
+          }
+        } catch (err) {
+          console.log("Fehler:", err.message);
+        }
+      });
+    }
+  );
+}
+
+updateBitcoinPrice();
+setInterval(updateBitcoinPrice, 60000);
 
 app.get("/", (req, res) => {
   res.send(`
