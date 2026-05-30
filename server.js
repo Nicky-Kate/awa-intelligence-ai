@@ -14,35 +14,22 @@ let profit = 0;
 let bitcoin = 67250;
 let gold = 2320;
 let silver = 30;
-function updateBitcoinPrice() {
-  https.get(
-    "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd",
-    (response) => {
-      let data = "";
+async function updateBitcoinPrice() {
+  try {
+    const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd");
+    const json = await response.json();
 
-      response.on("data", (chunk) => {
-        data += chunk;
-      });
-
-      response.on("end", () => {
-        try {
-          const json = JSON.parse(data);
-
-          if (json.bitcoin && json.bitcoin.usd) {
-            bitcoin = json.bitcoin.usd;
-            console.log("Bitcoin:", bitcoin);
-          }
-        } catch (err) {
-          console.log("Fehler:", err.message);
-        }
-      });
+    if (json.bitcoin && json.bitcoin.usd) {
+      bitcoin = json.bitcoin.usd;
+      console.log("Bitcoin live:", bitcoin);
     }
-  );
+  } catch (err) {
+    console.log("Bitcoin Fehler:", err.message);
+  }
 }
 
 updateBitcoinPrice();
 setInterval(updateBitcoinPrice, 60000);
-
 app.get("/", (req, res) => {
   res.send(`
   <!DOCTYPE html>
