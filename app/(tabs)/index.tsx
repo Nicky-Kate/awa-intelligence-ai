@@ -15,12 +15,14 @@ const [trades, setTrades] = useState<any[]>([]);
     try {
       const response = await fetch("https://awa-intelligence-ai.onrender.com/ai");
       const data = await response.json();
+console.log("API DATA:", data);
 
       setStatus(data.status ?? "ONLINE");
       setSignal(data.signal ?? "HOLD");
       setBalance(data.balance ?? 1000);
       setProfit(data.profit ?? 0);
-      setBitcoin(data.bitcoin ?? 0);
+    console.log("API Bitcoin:", data.bitcoin);
+setBitcoin(Number(data.bitcoin) || 0);
       setEthereum(data.ethereum ?? 0);
       setGold(data.gold ?? 0);
       setSilver(data.silver ?? 0);
