@@ -1,5 +1,6 @@
-require("dotenv").config(); 
+trequire("dotenv").config(); 
 const express = require("express");
+const cors =require("cors");
 const fs = require("fs");
 const Binance = require("binance-api-node").default;
 
@@ -10,6 +11,7 @@ const binanceClient = Binance({
 const TRADE_FILE = "trades.json";
 
 const app = express();
+app.use(cors());
 const PORT = process.env.PORT || 3000;
 
 let status = "ONLINE";
@@ -511,6 +513,25 @@ app.get("/confirm-sell", (req, res) => {
     );
 
     res.send("BTC Verkauf bestätigt!");
+});
+app.get("/confirm-buy", async (req, res) => {
+  signal = "BUY";
+
+  res.json({
+    success: true,
+    action: "BUY",
+    signal
+  });
+});
+
+app.get("/confirm-sell", async (req, res) => {
+  signal = "SELL";
+
+  res.json({
+    success: true,
+    action: "SELL",
+    signal
+  });
 });
 app.listen(PORT, () => {
   console.log("Server läuft auf Port " + PORT);

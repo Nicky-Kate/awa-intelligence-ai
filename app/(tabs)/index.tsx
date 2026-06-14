@@ -62,6 +62,39 @@ setTrades(tradeData.slice(-5).reverse());
     {trade.type} {trade.price}
   </Text>
 ))}
+<Text
+  style={{
+    backgroundColor: "#00aa00",
+    color: "white",
+    padding: 12,
+    marginTop: 20,
+    borderRadius: 10,
+    textAlign: "center"
+  }}
+  onPress={async () => {
+    await fetch("https://awa-intelligence-ai.onrender.com/confirm-buy");
+    loadData();
+  }}
+>
+  BUY BESTÄTIGEN
+</Text>
+
+<Text
+  style={{
+    backgroundColor: "#cc0000",
+    color: "white",
+    padding: 12,
+    marginTop: 10,
+    borderRadius: 10,
+    textAlign: "center"
+  }}
+  onPress={async () => {
+    await fetch("https://awa-intelligence-ai.onrender.com/confirm-sell");
+    loadData();
+  }}
+>
+  SELL BESTÄTIGEN
+</Text>
       <View style={styles.market}>
         <Text style={styles.marketTitle}>Live Märkte</Text>
         <Text style={styles.btc}>₿ Bitcoin: ${bitcoin}</Text>
