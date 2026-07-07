@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AWA Intelligence</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top, rgba(212,175,55,0.18), transparent 28%),
+        linear-gradient(180deg, #07111f 0%, #020308 100%);
+      color: #ffffff;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .app {
+      max-width: 430px;
+      margin: 0 auto;
+      min-height: 100vh;
+      padding: 24px 18px 92px;
+    }
+
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .circle {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(212,175,55,0.22);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d4af37;
+      font-size: 18px;
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 22px;
+    }
+
+    .brand .awa {
+      font-size: 56px;
+      font-weight: 900;
+      letter-spacing: 8px;
+      background: linear-gradient(135deg, #fff2bd, #d4af37, #7d571f);
+      -webkit-background-clip: text;
+      color: transparent;
+      line-height: 1;
+    }
+
+    .brand .sub {
+      margin-top: 6px;
+      color: #cbd5e1;
+      letter-spacing: 8px;
+      font-size: 12px;
+    }
+
+    .card {
+      background:
+        linear-gradient(160deg, rgba(20,31,50,0.98), rgba(5,10,19,0.98));
+      border: 1px solid rgba(212,175,55,0.18);
+      border-radius: 30px;
+      padding: 22px;
+      margin-bottom: 16px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    }
+
+    .muted {
+      color: #9ca3af;
+      font-size: 14px;
+    }
+
+    .gold { color: #d4af37; }
+    .green { color: #22c55e; }
+    .red { color: #ef4444; }
+
+    .balance {
+      font-size: 44px;
+      font-weight: 900;
+      margin: 10px 0 4px;
+      letter-spacing: -1px;
+    }
+
+    .status {
+      font-size: 14px;
+      color: #22c55e;
+      margin-bottom: 12px;
+    }
+
+    .chart {
+      height: 92px;
+      border-radius: 20px;
+      overflow: hidden;
+      margin: 18px 0 8px;
+      background: linear-gradient(180deg, rgba(212,175,55,0.16), rgba(212,175,55,0.01));
+      position: relative;
+    }
+
+    .chart svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .chart path {
+      fill: none;
+      stroke: #d4af37;
+      stroke-width: 4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 5px rgba(212,175,55,0.7));
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 15px;
+      gap: 12px;
+    }
+
+    .row strong {
+      font-size: 15px;
+      text-align: right;
+    }
+
+    .recommendation {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .compass {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle, rgba(212,175,55,0.22), rgba(212,175,55,0.04));
+      border: 1px solid rgba(212,175,55,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 38px;
+      box-shadow: inset 0 0 22px rgba(212,175,55,0.08);
+    }
+
+    h2 {
+      margin: 6px 0;
+      font-size: 25px;
+      line-height: 1.1;
+    }
+
+    .reason {
+      color: #d7dce7;
+      font-size: 13px;
+      line-height: 1.45;
+      margin: 8px 0 0;
+    }
+
+    .riskbar {
+      height: 9px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .riskfill {
+      height: 100%;
+      width: 35%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22c55e, #d4af37, #ef4444);
+    }
+
+    .markets {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .market {
+      background: linear-gradient(160deg, rgba(34,48,70,0.92), rgba(11,20,35,0.96));
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 24px;
+      padding: 16px;
+      min-height: 118px;
+    }
+
+    .market-name {
+      color: #a9b1c3;
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+
+    .market-price {
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .spark {
+      margin-top: 14px;
+      height: 28px;
+    }
+
+    .actions button {
+      width: 100%;
+      border-radius: 18px;
+      padding: 15px;
+      margin-top: 10px;
+      border: none;
+      font-weight: 900;
+      font-size: 15px;
+      cursor: pointer;
+    }
+
+    .buy {
+      background: linear-gradient(135deg, #fff0a6, #d4af37);
+      color: #111827;
+    }
+
+    .sell {
+      background: transparent;
+      color: #d4af37;
+      border: 1px solid rgba(212,175,55,0.7) !important;
+    }
+
+    .nav {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 430px;
+      background: rgba(2,4,8,0.96);
+      border-top: 1px solid rgba(212,175,55,0.18);
+      display: flex;
+      justify-content: space-around;
+      padding: 13px 0 11px;
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    .nav span:first-child {
+      color: #d4af37;
+      font-weight: 900;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="app">
+    <div class="top">
+      <div class="circle">☀️</div>
+      <div class="circle">🔔</div>
+    </div>
+
+    <section class="brand">
+      <div class="awa">AWA</div>
+      <div class="sub">INTELLIGENCE</div>
+    </section>
+
+    <section class="card">
+      <div class="muted">Gesamtvermögen</div>
+      <div class="balance" id="accountValue">...</div>
+      <div class="status" id="connection">Live verbunden</div>
+
+      <div class="chart">
+        <svg viewBox="0 0 360 95" preserveAspectRatio="none">
+          <path d="M0,74 C35,72 65,78 95,65 C130,48 150,60 178,40 C215,15 245,34 275,22 C306,9 330,16 360,8" />
+        </svg>
+      </div>
+
+      <div class="row">
+        <span>💶 Sofort auszahlbar</span>
+        <strong id="available">...</strong>
+      </div>
+
+      <div class="row">
+        <span>🟡 Investiert</span>
+        <strong id="invested">...</strong>
+      </div>
+
+      <div class="row">
+        <span>📈 Gewinn / Verlust</span>
+        <strong id="profit">...</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="recommendation">
+        <div class="compass" id="modeIcon">🧭</div>
+        <div>
+          <div class="gold"><strong>AWA Empfehlung</strong></div>
+          <h2 id="recommendation">...</h2>
+          <p class="reason" id="reason">...</p>
+        </div>
+      </div>
+
+      <div class="row">
+        <span>KI Vertrauen</span>
+        <strong id="confidence">...</strong>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="gold"><strong>Risiko</strong></div>
+      <div id="riskText" style="margin-top: 8px;">...</div>
+      <div class="riskbar">
+        <div class="riskfill" id="riskFill"></div>
+      </div>
+    </section>
+
+    <section class="markets">
+      <div class="market">
+        <div class="market-name">₿ Bitcoin</div>
+        <div class="market-price" id="bitcoin">...</div>
+        <svg class="spark" viewBox="0 0 120 30">
+          <path d="M0 20 L15 18 L30 21 L45 12 L60 16 L78 8 L96 13 L120 7" stroke="#d4af37" fill="none" stroke-width="3"/>
+        </svg>
+      </div>
+
+      <div class="market">
+        <div class="market-name">♦ Ethereum</div>
+        <div class="market-price" id="ethereum">...</div>
+        <svg class="spark" viewBox="0 0 120 30">
+          <path d="M0 16 L20 10 L35 20 L50 14 L68 18 L82 11 L100 15 L120 9" stroke="#d4af37" fill="none" stroke-width="3"/>
+        </svg>
+      </div>
+
+      <div class="market">
+        <div class="market-name">🟡 Gold</div>
+        <div class="market-price" id="gold">...</div>
+        <svg class="spark" viewBox="0 0 120 30">
+          <path d="M0 22 L18 20 L34 18 L50 14 L67 15 L82 9 L100 11 L120 6" stroke="#d4af37" fill="none" stroke-width="3"/>
+        </svg>
+      </div>
+
+      <div class="market">
+        <div class="market-name">⚪ Silber</div>
+        <div class="market-price" id="silver">...</div>
+        <svg class="spark" viewBox="0 0 120 30">
+          <path d="M0 15 L18 19 L36 16 L55 21 L74 12 L92 15 L108 10 L120 14" stroke="#d4af37" fill="none" stroke-width="3"/>
+        </svg>
+      </div>
+    </section>
+
+    <section class="card actions">
+      <button class="buy" onclick="location.href='/confirm-buy'">Kauf bestätigen</button>
+      <button class="sell" onclick="location.href='/confirm-sell'">Verkauf bestätigen</button>
+    </section>
+  </main>
+
+  <nav class="nav">
+    <span>Übersicht</span>
+    <span>Portfolio</span>
+    <span>Märkte</span>
+    <span>Analysen</span>
+    <span>Profil</span>
+  </nav>
+
+  <script>
+    function euro(value) {
+      return Number(value || 0).toFixed(2) + " €";
+    }
+
+    async function loadData() {
+      try {
+        const res = await fetch("/ai");
+        const data = await res.json();
+
+        const accountValue = Number(data.accountValue || data.binanceBalance || 0);
+        const available = Number(data.available || data.balance || 0);
+        const invested = Number(data.investedValue || 0);
+        const profit = Number(data.profit || 0);
+        const confidence = Number(data.confidence || 0);
+
+        document.getElementById("accountValue").innerText = euro(accountValue);
+        document.getElementById("available").innerText = euro(available);
+        document.getElementById("invested").innerText = euro(invested);
+        document.getElementById("profit").innerText = euro(profit);
+        document.getElementById("confidence").innerText = confidence + "%";
+
+        document.getElementById("bitcoin").innerText = "$" + Number(data.bitcoin || 0).toLocaleString("de-DE");
+        document.getElementById("ethereum").innerText = "$" + Number(data.ethereum || 0).toLocaleString("de-DE");
+        document.getElementById("gold").innerText = "$" + Number(data.gold || 0).toLocaleString("de-DE");
+        document.getElementById("silver").innerText = "$" + Number(data.silver || 0).toLocaleString("de-DE");
+
+        let recommendation = "Ausgewogener Modus";
+        let reason = "Ich beobachte den Markt und empfehle aktuell abzuwarten.";
+        let icon = "🧭";
+        let risk = 35;
+
+        if (data.signal === "BUY") {
+          recommendation = "Kauf vorbereiten";
+          reason = "Die Marktbewegung zeigt eine mögliche Einstiegschance. AWA empfiehlt einen kleinen, kontrollierten Trade.";
+          icon = "☀️";
+          risk = 45;
+        }
+
+        if (data.signal === "SELL") {
+          recommendation = "Verkauf prüfen";
+          reason = "AWA erkennt erhöhtes Risiko. Ich empfehle, die Position aufmerksam zu beobachten.";
+          icon = "⚠️";
+          risk = 70;
+        }
+
+        document.getElementById("recommendation").innerText = recommendation;
+        document.getElementById("reason").innerText = reason;
+        document.getElementById("modeIcon").innerText = icon;
+        document.getElementById("riskFill").style.width = risk + "%";
+        document.getElementById("riskText").innerText =
+          risk > 65 ? "Hoch" : risk > 40 ? "Mittel" : "Niedrig";
+
+        document.getElementById("connection").innerText =
+          data.binanceConnected ? "Binance live verbunden" : "Verbindung prüfen";
+
+      } catch (e) {
+        document.getElementById("connection").innerText = "Verbindung unterbrochen";
+      }
+    }
+
+    loadData();
+    setInterval(loadData, 5000);
+  </script>
+</body>
+</html>

@@ -1,9 +1,10 @@
 {
   "name": "awa-intelligence-ai",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "expo-router/entry",
   "scripts": {
-    "start": "node server.js"
+    "start": "expo start",
+    "server": "node server.js"
   },
   "dependencies": {
     "@expo/vector-icons": "^15.0.2",

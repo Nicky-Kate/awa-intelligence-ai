@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#02050b" />
+  <title>AWA Intelligence</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="awa">
+    <header class="top">
+      <div class="top-icon" aria-label="Profil">👤</div>
+      <div class="brand">
+        <div class="brand-logo">AWA</div>
+        <div class="brand-sub">INTELLIGENCE</div>
+      </div>
+      <div class="top-icon" aria-label="Benachrichtigungen">🔔</div>
+    </header>
+
+    <section class="hero">
+      <article class="wealth-card glass">
+        <div class="wealth-content">
+          <p class="label">GESAMTVERMÖGEN</p>
+          <h1 id="accountValue">0,00 €</h1>
+          <p id="connection" class="live">● LIVE VERBUNDEN</p>
+        </div>
+        <div class="world" aria-hidden="true">
+          <div class="globe"></div>
+          <svg viewBox="0 0 360 140" preserveAspectRatio="none">
+            <path d="M0 105 C35 98 52 88 78 90 C112 94 122 58 152 64 C185 72 196 38 228 42 C260 46 275 22 308 27 C330 30 344 16 360 8"/>
+          </svg>
+        </div>
+      </article>
+
+      <article class="summary-card glass">
+        <div class="summary-row">
+          <span class="bubble green">€</span>
+          <p>Sofort auszahlbar</p>
+          <strong id="available">0,00 €</strong>
+        </div>
+        <div class="summary-row">
+          <span class="bubble gold">◔</span>
+          <p>Investiert</p>
+          <strong id="invested">0,00 €</strong>
+        </div>
+        <div class="summary-row">
+          <span class="bubble green">↗</span>
+          <p>Gewinn / Verlust</p>
+          <strong id="profit">0,00 €</strong>
+        </div>
+      </article>
+    </section>
+
+    <section class="recommend glass">
+      <div class="compass" aria-hidden="true">
+        <div class="compass-inner">✦</div>
+      </div>
+      <div class="recommend-text">
+        <p class="gold-label">AWA EMPFEHLUNG</p>
+        <h2 id="recommendation">ABWARTEN</h2>
+        <span class="mode-pill" id="mode">AUSGEWOGENER MODUS</span>
+        <p id="reason">Die Marktbedingungen sind stabil. Ich sehe aktuell keinen klaren Vorteil für Kauf oder Verkauf.</p>
+      </div>
+      <div class="trust">
+        <span id="confidence">60%</span>
+        <small>KI VERTRAUEN</small>
+      </div>
+    </section>
+
+    <section class="markets">
+      <article class="market glass">
+        <div class="coin btc">₿</div>
+        <p>BITCOIN</p>
+        <h3 id="bitcoin">...</h3>
+        <span class="red" id="btcChange">Live</span>
+        <div class="spark redline"></div>
+      </article>
+      <article class="market glass">
+        <div class="coin eth">♦</div>
+        <p>ETHEREUM</p>
+        <h3 id="ethereum">...</h3>
+        <span class="red" id="ethChange">Live</span>
+        <div class="spark redline"></div>
+      </article>
+      <article class="market glass">
+        <div class="coin goldcoin">▰</div>
+        <p>GOLD</p>
+        <h3 id="gold">...</h3>
+        <span class="green-text" id="goldChange">Live</span>
+        <div class="spark greenline"></div>
+      </article>
+      <article class="market glass">
+        <div class="coin silvercoin">▰</div>
+        <p>SILBER</p>
+        <h3 id="silver">...</h3>
+        <span class="green-text" id="silverChange">Live</span>
+        <div class="spark greenline"></div>
+      </article>
+    </section>
+
+    <section class="bottom-grid">
+      <article class="risk glass">
+        <p class="gold-label">RISIKO</p>
+        <div class="risk-main">
+          <div class="shield">🛡</div>
+          <h3 id="riskText">MITTEL</h3>
+          <strong id="riskScore">45 / 100</strong>
+        </div>
+        <div class="risk-bar"><div id="riskFill"></div></div>
+        <p class="desc">Ausgewogenes Risiko. AWA schützt dein Kapital und sucht nach sicheren Chancen.</p>
+      </article>
+
+      <article class="portfolio glass">
+        <p class="gold-label">PORTFOLIO</p>
+        <div class="portfolio-content">
+          <div class="donut"></div>
+          <div class="legend">
+            <p><span><span class="dot gold-bg"></span>Bitcoin</span><strong id="btcPercent">87,3%</strong></p>
+            <p><span><span class="dot blue-bg"></span>EUR</span><strong id="eurPercent">12,7%</strong></p>
+            <p><span><span class="dot gray-bg"></span>Andere</span><strong>0,0%</strong></p>
+            <hr />
+            <p><span>Gesamt</span><strong id="portfolioTotal">0,00 €</strong></p>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="auto glass">
+      <div class="bot">🤖</div>
+      <div>
+        <p class="gold-label">AUTOMATISCHE TRADES</p>
+        <p>AWA analysiert den Markt 24/7 und führt Trades nur nach klaren Regeln und mit Risikoschutz aus.</p>
+      </div>
+      <div class="auto-switch">AKTIV</div>
+    </section>
+  </main>
+
+  <nav class="nav">
+    <button class="active">Übersicht</button>
+    <button>Portfolio</button>
+    <button>Märkte</button>
+    <button>Analysen</button>
+    <button>Profil</button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

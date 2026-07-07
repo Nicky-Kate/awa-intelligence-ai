@@ -856,5 +856,23 @@
     "price": 63226,
     "amount": 0.01581627811343435,
     "time": "2026-06-12T13:37:04.492Z"
+  },
+  {
+    "id": 144,
+    "type": "LIVE_BUY",
+    "symbol": "BTCEUR",
+    "eurAmount": 5,
+    "orderId": 5625674828,
+    "status": "FILLED",
+    "time": "2026-06-20T14:57:34.951Z"
+  },
+  {
+    "id": 145,
+    "type": "LIVE_BUY",
+    "symbol": "BTCEUR",
+    "eurAmount": 20,
+    "orderId": 5632704053,
+    "status": "FILLED",
+    "time": "2026-06-23T18:21:38.637Z"
   }
 ]
