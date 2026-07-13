@@ -106,3 +106,37 @@ async function loadDashboard() {
 loadDashboard();
 
 setInterval(loadDashboard,5000);
+const navButtons = document.querySelectorAll(".nav button");
+
+navButtons.forEach((button, index) => {
+  button.addEventListener("click", () => {
+    navButtons.forEach((item) => item.classList.remove("active"));
+    button.classList.add("active");
+
+    if (index === 0) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    if (index === 1) {
+      document
+        .querySelector(".portfolio")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    if (index === 2) {
+      document
+        .querySelector(".markets")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    if (index === 3) {
+      document
+        .querySelector(".recommend")
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    if (index === 4) {
+      alert("Profil wird als Nächstes eingerichtet.");
+    }
+  });
+});
