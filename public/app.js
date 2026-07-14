@@ -1,3 +1,7 @@
+function safeNumber(value) {
+  const n = Number(value);
+  return Number.isFinite(n) ? n : 0;
+}
 async function loadDashboard() {
 
     try {
@@ -6,25 +10,25 @@ async function loadDashboard() {
         const data = await res.json();
 
         document.getElementById("accountValue").innerText =
-            Number(data.binanceBalance).toLocaleString("de-DE", {
+            safeNumber(data.binanceBalance).toaleString("de-DE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }) + " €";
 
         document.getElementById("available").innerText =
-            Number(data.available).toLocaleString("de-DE", {
+            safeNumber(data.available).toLocaleString("de-DE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }) + " €";
 
         document.getElementById("invested").innerText =
-            Number(data.investedValue).toLocaleString("de-DE", {
+            safeNumber(data.investedValue).toLocaleString("de-DE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }) + " €";
 
         document.getElementById("profit").innerText =
-            Number(data.profit).toLocaleString("de-DE", {
+            safeNumber(data.profit).toLocaleString("de-DE", {
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2
             }) + " €";
