@@ -1,4 +1,5 @@
-const API_URL = "https://awa-intelligence-ai.onrender.com/ai";
+const API_URL =
+  "https://awa-intelligence-ai-production.up.railway.app/ai";
 
 export async function getAWAData() {
   try {
